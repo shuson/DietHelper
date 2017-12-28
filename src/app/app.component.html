@@ -16,62 +16,91 @@
   <mat-horizontal-stepper linear="true">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Step 1:</ng-template>
+        <ng-template matStepLabel>Step 1: Basic Information</ng-template>
         <mat-grid-list cols="2" rowHeight="6:1">
           <mat-grid-tile>
             <mat-form-field>
               <mat-label>Full Name</mat-label>
-              <input [value] = "step1Form.fullName" name="fullName" matInput placeholder="Last name, First name" formControlName="nameCtrl" required>
+              <input [(ngModel)] = "step1Form.fullName" name="fullName" matInput placeholder="Last name, First name" formControlName="nameCtrl" required>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field>
               <mat-label>Email Address</mat-label>
-              <input matInput placeholder="email" formControlName="emailCtrl" required>
+              <input matInput [(ngModel)] = "step1Form.email" name="email" placeholder="email" formControlName="emailCtrl" required>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field>
               <mat-label>Age</mat-label>
-              <input matInput placeholder="age" formControlName="ageCtrl">
+              <input matInput [(ngModel)] = "step1Form.age" name="age" placeholder="age" formControlName="ageCtrl" required>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field>
               <mat-label>Gender</mat-label>
-              <mat-select placeholder="Select">
+              <mat-select [(ngModel)] = "step1Form.gender" name="gender" placeholder="Select" formControlName="genderCtrl" required>
                 <mat-option value="female">Female</mat-option>
                 <mat-option value="male">Male</mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Height</mat-label>
+              <input matInput [(ngModel)] = "step1Form.height" name="height" placeholder="height in CM" formControlName="heightCtrl" required>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Weight</mat-label>
+              <input matInput [(ngModel)] = "step1Form.weight" name="weight" placeholder="Weight in KG" formControlName="weightCtrl" required>
+            </mat-form-field>
+          </mat-grid-tile>
         </mat-grid-list>
         <div>
-          <button mat-button (click)="isStarted = false">Back</button>
-          <button mat-button matStepperNext color="primary">Next</button>
+          <button mat-raised-button color="warn" (click)="isStarted = false">Back</button>
+          <button mat-raised-button matStepperNext color="primary">Next</button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Step 2: </ng-template>
-        <mat-form-field>
-          <mat-label>Full Name</mat-label>
-          <input  matInput placeholder="Last name, First name" formControlName="nameCtrl" required>
-         </mat-form-field>
+        <ng-template matStepLabel>Step 2: More on activity</ng-template>
+        <mat-grid-list cols="2" rowHeight="6:1">
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Physical exercise level</mat-label>
+              <mat-select [(ngModel)] = "step2Form.level" name="level" placeholder="Select" formControlName="levelCtrl" required>
+                <mat-option value="sedentary">Little to no exercise</mat-option>
+                <mat-option value="active">Light exercise</mat-option>
+                <mat-option value="fit">Moderate exercise</mat-option>
+                <mat-option value="extra">Heavy exercise</mat-option>
+                <mat-option value="champion">Very heavy exercise</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Your health goal</mat-label>
+              <mat-select [(ngModel)] = "step2Form.goal" name="goal" placeholder="Select" formControlName="goalCtrl" required>
+                <mat-option value="lose">I want to lose weight</mat-option>
+                <mat-option value="gain">I want to bulk up</mat-option>
+                <mat-option value="equal">I want to eat healthy</mat-option>
+                <mat-option value="diet">I want a high protein diet</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext color="primary">Next</button>
+          <button mat-raised-button matStepperPrevious color="warn">Back</button>
+          <button mat-raised-button matStepperNext color="primary">Generate</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="report()">View Report</button>
-      </div>
+      <ng-template matStepLabel>Report</ng-template>
+      <app-report [basicInfo]="step1Form" [advancedInfo]></app-report>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

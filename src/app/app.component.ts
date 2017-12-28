@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Step1Form } from './model/step1Form';
+import { Step2Form } from './model/step2Form';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,19 @@ export class AppComponent implements OnInit{
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  step1Form = {
-    fullName: 'o',
+  step1Form: Step1Form = {
+    fullName: '',
     email: '',
+    gender: '',
     age: null,
-    gender: 'female'
-  }
+    height: null,
+    weight: null
+  };
+
+  step2Form: Step2Form = {
+    level: 'fit',
+    goal: 'lose'
+  };
 
   constructor(private _formBuilder: FormBuilder) { }
 
@@ -25,15 +34,15 @@ export class AppComponent implements OnInit{
     this.firstFormGroup = this._formBuilder.group({
       nameCtrl: ['', Validators.required],
       emailCtrl: ['', Validators.required],
-      ageCtrl: [null, Validators.max(70)]
+      genderCtrl: [null, Validators.required],
+      ageCtrl: [null, Validators.min(10)],
+      heightCtrl: [null, Validators.required],
+      weightCtrl: [null, Validators.required]
     });
 
     this.secondFormGroup = this._formBuilder.group({
-      nameCtrl: ['', Validators.required]
+      levelCtrl: ['', Validators.required],
+      goalCtrl: ['', Validators.required]
     });
-  }
-
-  public report () {
-    console.log(this.step1Form);
   }
 }
