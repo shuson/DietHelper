@@ -1,0 +1,10 @@
+.material-icons.md-64 { font-size: 64px; }
+.stepper-wrapper {
+    text-align: center;
+    height: 100%;
+    width: 70%;
+    margin: 5% auto;
+}
+mat-horizontal-stepper {
+    background-color: rgb(196, 224, 201);
+}
