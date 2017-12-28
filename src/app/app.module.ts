@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { UniversalMaterialModule } from './universal-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportComponent } from './report/report.component';
+import { BmrService } from './bmr.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { ReportComponent } from './report/report.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [BmrService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

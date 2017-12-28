@@ -3,7 +3,7 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="App Logo" src="../assets/diet.jpg">
+  <img width="300" alt="App Logo" src="./diethelper/assets/diet.jpg">
   <br>
   <br>
   <button mat-fab color="primary" (click)="isStarted = true">
@@ -11,7 +11,7 @@
   </button>
 </div>
 <div class="stepper-wrapper" *ngIf="isStarted">
-  <h3>Build up your eating!</h3>
+  <h2>Build up your eatings!</h2>
 
   <mat-horizontal-stepper linear="true">
     <mat-step [stepControl]="firstFormGroup">
@@ -100,7 +100,7 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Report</ng-template>
-      <app-report [basicInfo]="step1Form" [advancedInfo]></app-report>
+      <app-report [basicInfo]="step1Form" [advancedInfo]="step2Form"></app-report>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
