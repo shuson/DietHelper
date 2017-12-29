@@ -27,7 +27,10 @@
           <mat-grid-tile>
             <mat-form-field>
               <mat-label>Email Address</mat-label>
-              <input matInput [(ngModel)] = "step1Form.email" name="email" placeholder="email" formControlName="emailCtrl" required>
+              <input matInput [(ngModel)] = "step1Form.email" name="email" placeholder="email" formControlName="emailCtrl" required email>
+              <span *ngIf="firstFormGroup.hasError('email', 'email') && firstFormGroup.get('email').touched">
+                Please enter the correct email, this email not valid.
+              </span>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
@@ -94,13 +97,13 @@
         </mat-grid-list>
         <div>
           <button mat-raised-button matStepperPrevious color="warn">Back</button>
-          <button mat-raised-button matStepperNext color="primary">Generate</button>
+          <button mat-raised-button matStepperNext color="primary" (click)="report.generate()">Generate</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Report</ng-template>
-      <app-report [basicInfo]="step1Form" [advancedInfo]="step2Form"></app-report>
+      <app-report #report [basicInfo]="step1Form" [advancedInfo]="step2Form"></app-report>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

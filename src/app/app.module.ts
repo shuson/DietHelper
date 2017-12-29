@@ -5,6 +5,7 @@ import { UniversalMaterialModule } from './universal-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportComponent } from './report/report.component';
 import { BmrService } from './bmr.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { BmrService } from './bmr.service';
     BrowserModule,
     UniversalMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [BmrService],
   bootstrap: [AppComponent]

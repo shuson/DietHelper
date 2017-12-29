@@ -16,18 +16,68 @@ export class ReportComponent implements OnInit {
 
   bmr: number;
   calories: number;
+  caloryChartDataSets: any = [
+    {
+      data: [1, 2, 3],
+      label: 'current state'
+    },
+    {
+      data: [4, 3, 2],
+      label: 'target state'
+    }
+  ];
+  caloryChartLabels: string[] = ['Fat', 'Protein', 'Carbs'];
+  gramChartDataSets: any = [
+    {
+      data: [1, 2, 3, 4],
+      label: 'current state'
+    },
+    {
+      data: [4, 3, 2, 1],
+      label: 'target state'
+    }
+  ];
+  gramChartLabels: string[] = ['Fat', 'Protein', 'Carbs', 'Fiber'];
 
   constructor(private bmrService: BmrService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  public generate() {
     if(this.validateBasicInfo()) {
-      this.bmr = this.bmrService.calculate(this.basicInfo, this.advancedInfo);
+      this.bmr = this.bmrService.calculateBmr(this.basicInfo, this.advancedInfo);
       this.calories = this.bmr + this.bmrService.getGoal(this.advancedInfo);
+
+      this.caloryChartDataSets = [
+        {
+          data: this.bmrService.getDataByCalory(this.bmr, this.basicInfo, this.advancedInfo),
+          label: 'Current state'
+        },
+        {
+          data: this.bmrService.getDataByCalory(this.calories, this.basicInfo, this.advancedInfo),
+          label: 'Target state'
+        }
+      ];
+
+      this.gramChartDataSets = [
+        {
+          data: this.bmrService.getDataByFood(this.bmr, this.basicInfo, this.advancedInfo),
+          label: "Current state"
+        },
+        {
+          data: this.bmrService.getDataByFood(this.calories, this.basicInfo, this.advancedInfo),
+          label: "Target state"        
+        }
+      ];
     }
   }
 
   private validateBasicInfo() {
     //todo 1
     return true
+  }
+
+  public doPrint() {
+    window.print();
   }
 }
