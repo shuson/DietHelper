@@ -1,75 +1,77 @@
-<h2>Diet Report</h2>
-<mat-list>
-  <mat-grid-list cols="3" rowHeight="8:1">
-    <mat-grid-tile>
-      <h4>Name:</h4>
-      <p>
-        &nbsp;{{basicInfo.fullName}}
+<div id="printDiv">
+  <h2>Diet Report</h2>
+  <mat-list>
+    <mat-grid-list cols="3" rowHeight="8:1">
+      <mat-grid-tile>
+        <h4>Name:</h4>
+        <p>
+          &nbsp;{{basicInfo.fullName}}
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Email:</h4>
+        <p>
+          &nbsp;{{basicInfo.email}}
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Gender:</h4>
+        <p>
+          &nbsp;{{basicInfo.gender}}
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Age:</h4>
+        <p>
+          &nbsp;{{basicInfo.age}}
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Height:</h4>
+        <p>
+          &nbsp;{{basicInfo.height}} KG
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Weight:</h4>
+        <p>
+          &nbsp;{{basicInfo.weight}} cm
+        </p>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <h4 matLine>
+        <b>Basic result</b>
+      </h4>
+      <br>
+      <br>
+      <p matLine>
+        Your BMR (Basal Metabolic Rate) is {{bmr}} by Calories.
       </p>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <h4>Email:</h4>
-      <p>
-        &nbsp;{{basicInfo.email}}
+      <p matLine>
+        To achieve your target, you need {{calories}} Calories per day!
       </p>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <h4>Gender:</h4>
-      <p>
-        &nbsp;{{basicInfo.gender}}
-      </p>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <h4>Age:</h4>
-      <p>
-        &nbsp;{{basicInfo.age}}
-      </p>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <h4>Height:</h4>
-      <p>
-        &nbsp;{{basicInfo.height}} KG
-      </p>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <h4>Weight:</h4>
-      <p>
-        &nbsp;{{basicInfo.weight}} cm
-      </p>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-divider></mat-divider>
-  <mat-list-item>
-    <h4 matLine>
-      <b>Basic result</b>
-    </h4>
-    <br>
-    <br>
-    <p matLine>
-      Your BMR (Basal Metabolic Rate) is {{bmr}} by Calories.
-    </p>
-    <p matLine>
-      To achieve your target, you need {{calories}} Calories per day!
-    </p>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item style="height: 100%">
-    <h4 matLine>
-      <b>Breakdown of source (Fat, carbs and proteins) by Calories:</b>
-    </h4>
-    <div matLine style="margin: auto; height:70vh; width:70vw">
-      <canvas baseChart [datasets]="caloryChartDataSets" [labels]="caloryChartLabels" [chartType]="'radar'"></canvas>
-    </div>
-  </mat-list-item>
-  <mat-list-item style="height: 100%">
-    <h4 matLine>
-      <b>Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:</b>
-    </h4>
-    <div matLine style="margin: auto; height:70vh; width:70vw">
-      <canvas baseChart [datasets]="gramChartDataSets" [labels]="gramChartLabels" [chartType]="'radar'"></canvas>
-    </div>
-  </mat-list-item>
-  <mat-list-item>
-    <button mat-raised-button color="primary" (click)="doPrint()">Print</button>
-  </mat-list-item>
-</mat-list>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item style="height: 100%">
+      <h4 matLine>
+        <b>Breakdown of source (Fat, carbs and proteins) by Calories:</b>
+      </h4>
+      <div #canvas1 matLine style="margin: auto; height:65vh; width:65vw">
+        <canvas baseChart [datasets]="caloryChartDataSets" [labels]="caloryChartLabels" [chartType]="'radar'"></canvas>
+      </div>
+    </mat-list-item>
+    <mat-list-item style="height: 100%">
+      <h4 matLine>
+        <b>Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:</b>
+      </h4>
+      <div #canvas2 matLine style="margin: auto; height:65vh; width:65vw">
+        <canvas baseChart [datasets]="gramChartDataSets" [labels]="gramChartLabels" [chartType]="'radar'"></canvas>
+      </div>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-raised-button color="primary" (click)="doPrint()">Print</button>
+    </mat-list-item>
+  </mat-list>
+</div>
