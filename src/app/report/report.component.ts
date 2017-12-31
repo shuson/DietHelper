@@ -21,27 +21,9 @@ export class ReportComponent implements OnInit {
 
   bmr: number;
   calories: number;
-  caloryChartDataSets: any = [
-    {
-      data: [1, 2, 3],
-      label: 'current state'
-    },
-    {
-      data: [4, 3, 2],
-      label: 'target state'
-    }
-  ];
-  caloryChartLabels: string[] = ['Fat', 'Protein', 'Carbs'];
-  gramChartDataSets: any = [
-    {
-      data: [1, 2, 3, 4],
-      label: 'current state'
-    },
-    {
-      data: [4, 3, 2, 1],
-      label: 'target state'
-    }
-  ];
+  calorieChartData: any = [1,2,3];
+  calorieChartLabels: string[] = ['Fat', 'Protein', 'Carbs'];
+  gramChartData: any = [1,2,3,4];
   gramChartLabels: string[] = ['Fat', 'Protein', 'Carbs', 'Fiber'];
 
   constructor(private bmrService: BmrService) { }
@@ -53,27 +35,9 @@ export class ReportComponent implements OnInit {
       this.bmr = this.bmrService.calculateBmr(this.basicInfo, this.advancedInfo);
       this.calories = this.bmr + this.bmrService.getGoal(this.advancedInfo);
 
-      this.caloryChartDataSets = [
-        {
-          data: this.bmrService.getDataByCalory(this.bmr, this.basicInfo, this.advancedInfo),
-          label: 'Current state'
-        },
-        {
-          data: this.bmrService.getDataByCalory(this.calories, this.basicInfo, this.advancedInfo),
-          label: 'Target state'
-        }
-      ];
+      this.calorieChartData = this.bmrService.getDataByCalory(this.bmr, this.basicInfo, this.advancedInfo);
 
-      this.gramChartDataSets = [
-        {
-          data: this.bmrService.getDataByFood(this.bmr, this.basicInfo, this.advancedInfo),
-          label: "Current state"
-        },
-        {
-          data: this.bmrService.getDataByFood(this.calories, this.basicInfo, this.advancedInfo),
-          label: "Target state"        
-        }
-      ];
+      this.gramChartData = this.bmrService.getDataByFood(this.bmr, this.basicInfo, this.advancedInfo)
     }
   }
 
@@ -114,17 +78,18 @@ export class ReportComponent implements OnInit {
     doc.text(40, 90, "To achieve your target, you need "+ this.calories +" Calories per day! ")
 
     doc.line(10, 100, 200, 100);
+
     let p1 = html2canvas(this.canvas1Ref.nativeElement);
     let p2 = html2canvas(this.canvas2Ref.nativeElement);
     return Promise.all([p1, p2]).then((result) => {
       let info1 = result[0].toDataURL("image/png");
       doc.text(40, 105, "Breakdown of source (Fat, carbs and proteins) by Calories:")
-      doc.addImage(info1, 'JPEG', -110, 110); //the -150 is a hack
+      doc.addImage(info1, 'JPEG', -10, 110, 240, 120); //the -150 is a hack
       
       doc.addPage();
       doc.text(40, 10, "Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:")
       let result1 = result[1].toDataURL("image/png");
-      doc.addImage(result1, 'JPEG', -110, 20);
+      doc.addImage(result1, 'JPEG', -10, 20, 240, 120);
 
       return doc;
     })

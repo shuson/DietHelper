@@ -1,6 +1,8 @@
 <div id="printDiv">
   <h2>Diet Report</h2>
   <mat-list>
+    <h3>Basic Information</h3>
+    <mat-divider></mat-divider>
     <mat-grid-list cols="3" rowHeight="8:1">
       <mat-grid-tile>
         <h4>Name:</h4>
@@ -39,27 +41,25 @@
         </p>
       </mat-grid-tile>
     </mat-grid-list>
+    <h3>Current State</h3>
     <mat-divider></mat-divider>
     <mat-list-item>
-      <h4 matLine>
-        <b>Basic result</b>
-      </h4>
-      <br>
-      <br>
       <p matLine>
-        Your BMR (Basal Metabolic Rate) is {{bmr}} by Calories.
+        Your BMR (Basal Metabolic Rate) is <b style="color: green">{{bmr}}</b> by Calories.
       </p>
       <p matLine>
-        To achieve your target, you need {{calories}} Calories per day!
+        To achieve your target, you need <b style="color: red">{{calories}}</b> Calories per day!
       </p>
     </mat-list-item>
+    <h3>Target State</h3>
+    <mat-divider></mat-divider>
     <mat-divider></mat-divider>
     <mat-list-item style="height: 100%">
       <h4 matLine>
         <b>Breakdown of source (Fat, carbs and proteins) by Calories:</b>
       </h4>
       <div #canvas1 matLine style="margin: auto; height:65vh; width:65vw">
-        <canvas baseChart [datasets]="caloryChartDataSets" [labels]="caloryChartLabels" [chartType]="'radar'"></canvas>
+        <canvas baseChart [data]="calorieChartData" [labels]="calorieChartLabels" [chartType]="'pie'"></canvas>
       </div>
     </mat-list-item>
     <mat-list-item style="height: 100%">
@@ -67,7 +67,7 @@
         <b>Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:</b>
       </h4>
       <div #canvas2 matLine style="margin: auto; height:65vh; width:65vw">
-        <canvas baseChart [datasets]="gramChartDataSets" [labels]="gramChartLabels" [chartType]="'radar'"></canvas>
+        <canvas baseChart [data]="gramChartData" [labels]="gramChartLabels" [chartType]="'pie'"></canvas>
       </div>
     </mat-list-item>
     <mat-list-item>

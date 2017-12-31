@@ -17,15 +17,15 @@ export class AppComponent implements OnInit{
   step1Form: Step1Form = {
     fullName: '',
     email: '',
-    gender: 'female',
+    gender: null,
     age: null,
     height: null,
     weight: null
   };
 
   step2Form: Step2Form = {
-    level: 'fit',
-    goal: 'lose'
+    level: null,
+    goal: null
   };
 
   constructor(private _formBuilder: FormBuilder) { }
