@@ -66,18 +66,20 @@ export class ReportComponent implements OnInit {
     doc.text(80, 40, "Email: " + this.basicInfo.email);
     doc.text(130, 40, "Gender: " + this.basicInfo.gender);
     doc.text(30, 50, "Age: " + this.basicInfo.age);
-    doc.text(80, 50, "Height: " + this.basicInfo.height);
-    doc.text(130, 50, "Weight: " + this.basicInfo.weight);
+    doc.text(80, 50, "Height(CM): " + this.basicInfo.height);
+    doc.text(130, 50, "Weight(KG): " + this.basicInfo.weight);
     
     doc.setFontSize(16);
-    doc.text(20, 70, "Basic Result")
+    doc.text(20, 70, "Current State")
     doc.line(10, 73, 200, 73);
     
     doc.setFontSize(14);
     doc.text(50, 80, "Your BMR (Basal Metabolic Rate) is " + this.bmr + " by Calories.");
     doc.text(40, 90, "To achieve your target, you need "+ this.calories +" Calories per day! ")
 
-    doc.line(10, 100, 200, 100);
+    doc.setFontSize(16);
+    doc.text(20, 100, "Target State")
+    doc.line(10, 103, 200, 103);
 
     let p1 = html2canvas(this.canvas1Ref.nativeElement);
     let p2 = html2canvas(this.canvas2Ref.nativeElement);
