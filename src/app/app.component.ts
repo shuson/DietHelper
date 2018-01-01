@@ -15,12 +15,12 @@ export class AppComponent implements OnInit{
   secondFormGroup: FormGroup;
 
   step1Form: Step1Form = {
-    fullName: '',
-    email: '',
-    gender: null,
-    age: null,
-    height: null,
-    weight: null
+    fullName: 'a',
+    email: 'a@a',
+    gender: "male",
+    age: 22,
+    height: 157,
+    weight: 77
   };
 
   step2Form: Step2Form = {
