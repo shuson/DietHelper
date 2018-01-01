@@ -67,7 +67,7 @@ export class BmrService {
 
     let fatCalories = Math.floor(fatGrams * 9);
     let proteinCalories = Math.floor(proteinGrams * 4);
-    let carbsCalories = calories - fatCalories - proteinCalories;
+    let carbsCalories = Math.floor(calories - fatCalories - proteinCalories);
 
     return [fatCalories, proteinCalories, carbsCalories];
   }
@@ -88,7 +88,7 @@ export class BmrService {
 
   private getFatGrams(calories: number) {
     let base = 53;
-    return base + ((calories - 1600) / 400 * 8);
+    return Math.floor(base + ((calories - 1600) / 400 * 8));
   }
 
   private getProteinGrams(basicInfo: Step1Form, advancedInfo: Step2Form) {
@@ -102,7 +102,7 @@ export class BmrService {
   }
 
   private getCarbsGrams(calories: number) {
-    return calories / 4;
+    return Math.floor(calories / 4);
   }
 
   private getFiberGrams() {

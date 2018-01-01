@@ -37,7 +37,7 @@ export class ReportComponent implements OnInit {
 
       this.calorieChartData = this.bmrService.getDataByCalory(this.bmr, this.basicInfo, this.advancedInfo);
 
-      this.gramChartData = this.bmrService.getDataByFood(this.bmr, this.basicInfo, this.advancedInfo)
+      this.gramChartData = this.bmrService.getDataByFood(this.bmr, this.basicInfo, this.advancedInfo);
     }
   }
 
@@ -85,13 +85,19 @@ export class ReportComponent implements OnInit {
     let p2 = html2canvas(this.canvas2Ref.nativeElement);
     return Promise.all([p1, p2]).then((result) => {
       let info1 = result[0].toDataURL("image/png");
-      doc.text(40, 105, "Breakdown of source (Fat, carbs and proteins) by Calories:")
-      doc.addImage(info1, 'JPEG', -10, 110, 240, 120); //the -150 is a hack
+      doc.setFontSize(14);
+      doc.text(40, 110, "Breakdown of source (Fat, carbs and proteins) by Calories:")
+      doc.setFontSize(12);
+      doc.text(20, 120, "Fat: " + this.calorieChartData[0] + "; Protein: " + this.calorieChartData[1] + "; Carbs: " + this.calorieChartData[2]);
+      doc.addImage(info1, 'JPEG', -10, 130, 240, 120); //the -150 is a hack
+      
       
       doc.addPage();
+      doc.setFontSize(14);
       doc.text(40, 10, "Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:")
+      doc.text(20, 20, "Fat: " + this.gramChartData[0] + "; Protein: " + this.gramChartData[1] + "; Carbs: " + this.gramChartData[2] + "; Fiber: " + this.gramChartData[3]);
       let result1 = result[1].toDataURL("image/png");
-      doc.addImage(result1, 'JPEG', -10, 20, 240, 120);
+      doc.addImage(result1, 'JPEG', -10, 30, 240, 120);
 
       return doc;
     })
