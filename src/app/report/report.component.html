@@ -53,7 +53,6 @@
     </mat-list-item>
     <h3>Target State</h3>
     <mat-divider></mat-divider>
-    <mat-divider></mat-divider>
     <mat-list-item style="height: 100%">
       <h4 matLine>
         <b>Breakdown of source (Fat, carbs and proteins) by Calories:</b>
@@ -61,7 +60,13 @@
       <div #canvas1 matLine style="margin: auto; height:65vh; width:65vw">
         <canvas baseChart [data]="calorieChartData" [labels]="calorieChartLabels" [chartType]="'pie'"></canvas>
       </div>
+      <p matLine>
+        {{calorieChartLabels[0]}}: {{calorieChartData[0]}}(caloriesPercent[0]); {{calorieChartLabels[1]}}: {{calorieChartData[1]}}(caloriesPercent[1]);
+        {{calorieChartLabels[2]}}: {{calorieChartData[2]}}(caloriesPercent[2]);
+      </p>
     </mat-list-item>
+    <br><br><br>
+    <mat-divider></mat-divider>
     <mat-list-item style="height: 100%">
       <h4 matLine>
         <b>Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:</b>
@@ -69,6 +74,10 @@
       <div #canvas2 matLine style="margin: auto; height:65vh; width:65vw">
         <canvas baseChart [data]="gramChartData" [labels]="gramChartLabels" [chartType]="'pie'"></canvas>
       </div>
+      <p matLine>
+        {{gramChartLabels[0]}}: {{gramChartData[0]}}({{gramPercent[0]}}); {{gramChartLabels[1]}}: {{gramChartData[1]}}({{gramPercent[1]}}); 
+        {{gramChartLabels[2]}}: {{gramChartData[2]}}({{gramPercent[2]}}); {{gramChartLabels[3]}}: {{gramChartData[3]}}({{gramPercent[3]}});
+      </p>
     </mat-list-item>
     <mat-list-item>
       <button mat-raised-button color="primary" (click)="doPrint()">Save to PDF</button>

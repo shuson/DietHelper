@@ -23,8 +23,11 @@ export class ReportComponent implements OnInit {
   calories: number;
   calorieChartData: any = [1,2,3];
   calorieChartLabels: string[] = ['Fat', 'Protein', 'Carbs'];
+  caloriesPercent = [];
   gramChartData: any = [1,2,3,4];
   gramChartLabels: string[] = ['Fat', 'Protein', 'Carbs', 'Fiber'];
+  gramPercent = []
+
 
   constructor(private bmrService: BmrService) { }
 
@@ -36,17 +39,10 @@ export class ReportComponent implements OnInit {
       this.calories = this.bmr + this.bmrService.getGoal(this.advancedInfo);
 
       this.calorieChartData = this.bmrService.getDataByCalory(this.bmr, this.basicInfo, this.advancedInfo);
-      let pers1 = this.precentagize(this.calorieChartData);
-      this.calorieChartLabels[0] += ": " + this.calorieChartData[0] + "(" + pers1[0] + ")";
-      this.calorieChartLabels[1] += ": " + this.calorieChartData[1] + "(" + pers1[1] + ")";;
-      this.calorieChartLabels[2] += ": " + this.calorieChartData[2] + "(" + pers1[2] + ")";;
+      this.caloriesPercent = this.precentagize(this.calorieChartData);
 
       this.gramChartData = this.bmrService.getDataByFood(this.bmr, this.basicInfo, this.advancedInfo);
-      let pers2 = this.precentagize(this.gramChartData);
-      this.gramChartLabels[0] += ": " + this.gramChartData[0] + "(" + pers2[0] + ")";
-      this.gramChartLabels[1] += ": " + this.gramChartData[1] + "(" + pers2[1] + ")";;
-      this.gramChartLabels[2] += ": " + this.gramChartData[2] + "(" + pers2[2] + ")";;
-      this.gramChartLabels[3] += ": " + this.gramChartData[3] + "(" + pers2[3] + ")";;
+      this.gramPercent = this.precentagize(this.gramChartData);
     }
   }
 
@@ -96,14 +92,18 @@ export class ReportComponent implements OnInit {
       let info1 = result[0].toDataURL("image/png");
       doc.setFontSize(14);
       doc.text(40, 110, "Breakdown of source (Fat, carbs and proteins) by Calories:")
-      doc.addImage(info1, 'JPEG', -10, 125, 240, 120); //the -150 is a hack
+      doc.setFontSize(12);
+      doc.text(20, 120, "Fat: " + this.calorieChartData[0] + "; Protein: " + this.calorieChartData[1] + "; Carbs: " + this.calorieChartData[2]);
+      doc.addImage(info1, 'JPEG', -10, 130, 240, 120); //the -150 is a hack
       
       
       doc.addPage();
       doc.setFontSize(14);
       doc.text(40, 10, "Breakdown of types of food (fat, carbs, protein, and fiber) by Grams:")
+      doc.setFontSize(12);
+      doc.text(20, 20, "Fat: " + this.gramChartData[0] + "; Protein: " + this.gramChartData[1] + "; Carbs: " + this.gramChartData[2] + "; Fiber: " + this.gramChartData[3]);
       let result1 = result[1].toDataURL("image/png");
-      doc.addImage(result1, 'JPEG', -10, 25, 240, 120);
+      doc.addImage(result1, 'JPEG', -10, 30, 240, 120);
 
       return doc;
     })
